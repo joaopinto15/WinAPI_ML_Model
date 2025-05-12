@@ -34,6 +34,26 @@ The backend is implemented with Flask and exposes:
   - `vectorizer_trabalhoX.pkl`
   - `selector_trabalhoX.pkl`
 
+## 📂 Available Datasets
+
+You can use or adapt publicly available WinAPI behavioral datasets, such as:
+
+- [WinAPI_100Sequences_Balanced](https://www.kaggle.com/code/joaopinto15/winapi-100sequences-balanced/output)
+  - mapping: `api_map.json`
+  - training: `all_data_combined.csv`
+- [Malware Analysis Datasets: API Call Sequences](https://ieee-dataport.org/open-access/malware-analysis-datasets-api-call-sequences)
+  - dataset: `malware-analysis-datasets-api-call-sequences.csv`
+
+Alternatively, you may generate your own dynamic traces using tools like Sysmon, Cuckoo Sandbox, or CAPEv2.
+
+
+- Buffered data is stored in `data/buffer_treino.csv`
+- All training data accumulates in `data/treino_total.csv`
+- Models are saved under the `models/` directory:
+  - `modelo_trabalhoX.pkl`
+  - `vectorizer_trabalhoX.pkl`
+  - `selector_trabalhoX.pkl`
+
 ## 🚀 Use Cases
 
 - Host-based Intrusion Detection Systems (HIDS)
@@ -49,4 +69,5 @@ The system is modular and easily extendable for:
 
 ---
 
-**License:** MIT
+**Maintainer:** João Pinto
+**License:** MIT (or your choice)
