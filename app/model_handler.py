@@ -1,4 +1,4 @@
-import os, joblib, json
+import joblib, json
 import pandas as pd
 from flask import jsonify
 from .api_mapper import mapear_chamadas
@@ -7,6 +7,24 @@ from sklearn.feature_selection import SelectKBest, chi2
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, matthews_corrcoef
+import logging
+import os
+
+# Ensure the logs directory exists
+os.makedirs("data", exist_ok=True)
+
+# Configure logger
+logger = logging.getLogger("ml_model_logger")
+logger.setLevel(logging.INFO)
+
+log_file = "app_events.log"
+
+# Avoid duplicate handlers if reloaded
+if not logger.hasHandlers():
+    handler = logging.FileHandler(log_file)
+    formatter = logging.Formatter('[%(asctime)s] [%(levelname)s] %(message)s')
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
 
 
 # === Definir caminhos ===
@@ -35,6 +53,7 @@ MODELOS = {
 
 def predict(request):
     raw_data = request.data.decode("utf-8").strip().split("\n")
+    logger.info(f"Received prediction request for trabalho={trabalho} with {len(raw_data)} entries")
     trabalho = request.args.get("trabalho")
 
     if trabalho not in MODELOS:
