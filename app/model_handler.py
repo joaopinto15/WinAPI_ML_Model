@@ -1,5 +1,6 @@
 import os, joblib, json
 import pandas as pd
+import logging
 from flask import jsonify
 from .api_mapper import mapear_chamadas
 from sklearn.feature_extraction.text import CountVectorizer
@@ -7,6 +8,10 @@ from sklearn.feature_selection import SelectKBest, chi2
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, matthews_corrcoef
+
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # === Definir caminhos ===
 os.makedirs("data", exist_ok=True)
