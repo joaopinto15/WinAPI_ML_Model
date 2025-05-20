@@ -53,8 +53,9 @@ MODELOS = {
 
 def predict(request):
     raw_data = request.data.decode("utf-8").strip().split("\n")
-    logger.info(f"Received prediction request for trabalho={trabalho} with {len(raw_data)} entries")
     trabalho = request.args.get("trabalho")
+
+    logger.info(f"Received prediction request for trabalho={trabalho} with {len(raw_data)} entries")
 
     if trabalho not in MODELOS:
         return jsonify({"erro": "Trabalho inválido (1, 2 ou 3)"}), 400
