@@ -78,10 +78,12 @@ def predict(request):
             process_name = entrada.get("process_name", "unknown")
             pid = entrada.get("pid", "unknown")
             resultados.append({
-                "entrada": i,
-                "previsao": "Malware" if pred == 1 else "Goodware",
-                "process_name": process_name,
-                "pid": pid
+                "prediction": {
+                    "entrada": i,
+                    "previsao": "Malware" if pred == 1 else "Goodware",
+                    "process_name": process_name,
+                    "pid": pid
+                }
             })
         except Exception as e:
             resultados.append({
